@@ -76,7 +76,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             onClose();
             onNavClick("#classes");
           }}
-          className="text-2xl font-medium tracking-wider hover:opacity-75 transition-opacity"
+          className="nav-link text-xl sm:text-2xl font-medium tracking-wider hover:opacity-75 transition-opacity"
         >
           CLASSES
         </button>
@@ -85,7 +85,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             onClose();
             onNavClick("#instructors");
           }}
-          className="text-2xl font-medium tracking-wider hover:opacity-75 transition-opacity"
+          className="nav-link text-xl sm:text-2xl font-medium tracking-wider hover:opacity-75 transition-opacity"
         >
           INSTRUCTORS
         </button>
@@ -94,7 +94,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             onClose();
             onNavClick("#schedule");
           }}
-          className="text-2xl font-medium tracking-wider hover:opacity-75 transition-opacity"
+          className="nav-link text-xl sm:text-2xl font-medium tracking-wider hover:opacity-75 transition-opacity"
         >
           SCHEDULE
         </button>

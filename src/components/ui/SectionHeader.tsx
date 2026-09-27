@@ -15,15 +15,15 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 }) => {
   return (
     <div className={`mb-10 select-none border-b-[1.5px] border-[#2e2e2e] pb-2 ${className}`}>
-      <div className="flex items-baseline justify-between">
-        <h2 className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-normal text-black tracking-tight leading-none uppercase">
+      <div className="flex items-baseline justify-between gap-3">
+        <h2 className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-normal text-black tracking-tight leading-none uppercase shrink-0">
           {title}
         </h2>
         {linkText && (
           <button
             type="button"
             onClick={onLinkClick}
-            className="text-sm sm:text-base md:text-[20px] font-medium text-black hover:opacity-60 transition-opacity cursor-pointer"
+            className="nav-link text-xs sm:text-sm md:text-base font-medium text-black hover:opacity-60 transition-opacity cursor-pointer whitespace-nowrap text-right"
           >
             {linkText}
           </button>

@@ -1,11 +1,16 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AccordionItemData } from "@/types";
 import { scrollToTarget } from "@/lib/gsap-utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+}
 
 interface AccordionSectionProps {
   id: string;
@@ -14,36 +19,88 @@ interface AccordionSectionProps {
 
 export const AccordionSection: React.FC<AccordionSectionProps> = ({ id, items }) => {
   const [openIndex, setOpenIndex] = useState<number>(0);
+  const [contentVisibleIndex, setContentVisibleIndex] = useState<number>(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const contentTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const toggleItem = (index: number, event?: React.MouseEvent<HTMLDivElement>) => {
-    const isOpening = openIndex !== index;
-    setOpenIndex(isOpening ? index : -1);
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (contentTimeoutRef.current) clearTimeout(contentTimeoutRef.current);
+    };
+  }, []);
 
-    if (isOpening && typeof window !== "undefined") {
-      const clickedRow = event?.currentTarget?.closest(".accordion-row") as HTMLElement | null;
-      if (clickedRow) {
-        // Wait briefly for content expansion calculation to settle
-        setTimeout(() => {
-          const rect = clickedRow.getBoundingClientRect();
-          const itemHeight = rect.height;
-          const windowHeight = window.innerHeight;
-          const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollItemToCenter = (index: number) => {
+    if (typeof window === "undefined") return;
+    setTimeout(() => {
+      const rowEl = itemRefs.current[index];
+      if (!rowEl) return;
 
-          // Header clearance offset (85px navbar)
-          const headerOffset = 42; // half of header height for balanced optical centering
+      const rect = rowEl.getBoundingClientRect();
+      const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+      const elementTop = currentScrollY + rect.top;
+      const elementHeight = rowEl.offsetHeight;
 
-          // Calculate vertical center of the expanded section aligned with viewport center
-          const targetY = currentScrollY + rect.top - (windowHeight / 2) + (itemHeight / 2) + (headerOffset / 2);
+      const windowHeight = window.innerHeight;
+      const headerHeight = 85; // Fixed navbar height
 
-          gsap.to(window, {
-            duration: 0.8,
-            scrollTo: { y: Math.max(0, targetY), autoKill: true },
-            ease: "power2.inOut",
-            overwrite: "auto",
-          });
-        }, 120);
-      }
+      // Align the vertical center of the entire expanded section with the vertical center of the visible viewport
+      const visibleCenter = headerHeight + (windowHeight - headerHeight) / 2;
+      const targetY = elementTop + elementHeight / 2 - visibleCenter;
+
+      gsap.to(window, {
+        duration: 0.75,
+        scrollTo: {
+          y: Math.max(0, targetY),
+          autoKill: true,
+        },
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    }, 100);
+  };
+
+  const toggleItem = (index: number) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    if (contentTimeoutRef.current) {
+      clearTimeout(contentTimeoutRef.current);
+      contentTimeoutRef.current = null;
+    }
+
+    if (openIndex === index) {
+      // User clicked the currently open section -> hide content and fold height shut immediately
+      setContentVisibleIndex(-1);
+      setOpenIndex(-1);
+    } else if (openIndex === -1) {
+      // Step 1: Open height first
+      setContentVisibleIndex(-1);
+      setOpenIndex(index);
+      scrollItemToCenter(index);
+
+      // Step 2: Content appears ONLY after height has fully opened (450ms)
+      contentTimeoutRef.current = setTimeout(() => {
+        setContentVisibleIndex(index);
+      }, 450);
+    } else {
+      // Step 0: Close previous section first
+      setContentVisibleIndex(-1);
+      setOpenIndex(-1);
+
+      timeoutRef.current = setTimeout(() => {
+        // Step 1: Open height of clicked section
+        setOpenIndex(index);
+        scrollItemToCenter(index);
+
+        // Step 2: Content appears ONLY after height has fully opened (450ms)
+        contentTimeoutRef.current = setTimeout(() => {
+          setContentVisibleIndex(index);
+        }, 450);
+      }, 350); // 350ms matches close transition
     }
   };
 
@@ -72,15 +129,19 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({ id, items })
     <section id={id} ref={sectionRef} className="w-[88%] max-w-7xl mx-auto my-20 space-y-6">
       {items.map((item, idx) => {
         const isOpen = openIndex === idx;
+        const isContentVisible = contentVisibleIndex === idx;
 
         return (
           <div
             key={item.id}
+            ref={(el) => {
+              itemRefs.current[idx] = el;
+            }}
             className="accordion-row select-none"
           >
             {/* Header row with regular uppercase typography & bottom border line */}
             <div
-              onClick={(e) => toggleItem(idx, e)}
+              onClick={() => toggleItem(idx)}
               className="border-b-[1.5px] border-[#2e2e2e] pb-2 flex items-center justify-between cursor-pointer group"
             >
               <h2 className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-normal text-black tracking-tight leading-none uppercase group-hover:opacity-75 transition-opacity">
@@ -103,26 +164,34 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({ id, items })
               </div>
             </div>
 
-            {/* Expandable Content Body with buttery CSS grid transition */}
+            {/* Stage 1: Expand height first (0ms - 450ms) */}
             <div
-              className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+              className={`grid transition-[grid-template-rows] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                 isOpen
-                  ? "grid-rows-[1fr] opacity-100"
-                  : "grid-rows-[0fr] opacity-0 pointer-events-none"
+                  ? "grid-rows-[1fr]"
+                  : "grid-rows-[0fr] pointer-events-none"
               }`}
             >
               <div className="overflow-hidden">
                 <div className="min-h-0 pl-0 sm:pl-4 md:pl-[38%] lg:pl-[45%] space-y-4 pt-6 pb-4">
+                  {/* Stage 2: Content appears smoothly ONLY AFTER height finishes opening */}
+                  {/* Heading */}
                   <h3
-                    className={`text-lg sm:text-xl md:text-2xl font-bold text-[#2e2e2e] transition-all duration-400 ${
-                      isOpen ? "translate-y-0 opacity-100 delay-100" : "translate-y-2 opacity-0"
+                    className={`text-lg sm:text-xl md:text-2xl font-bold text-[#2e2e2e] transition-all duration-500 ease-out ${
+                      isContentVisible
+                        ? "translate-y-0 opacity-100 delay-[50ms]"
+                        : "-translate-y-3 opacity-0 duration-150 delay-0"
                     }`}
                   >
                     {item.heading}
                   </h3>
+
+                  {/* Description paragraph */}
                   <p
-                    className={`text-xs sm:text-sm md:text-base text-neutral-700 leading-relaxed font-medium transition-all duration-400 ${
-                      isOpen ? "translate-y-0 opacity-100 delay-150" : "translate-y-2 opacity-0"
+                    className={`text-xs sm:text-sm md:text-base text-neutral-700 leading-relaxed font-medium transition-all duration-500 ease-out ${
+                      isContentVisible
+                        ? "translate-y-0 opacity-100 delay-[130ms]"
+                        : "-translate-y-3 opacity-0 duration-150 delay-0"
                     }`}
                   >
                     {item.description}
@@ -131,21 +200,19 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({ id, items })
                   {/* Sliced 3-Part Image Collage */}
                   <div className="flex items-center gap-2 sm:gap-3 pt-2 max-w-full overflow-hidden">
                     {[0, 1, 2].map((partIdx) => {
-                      const delays = ["delay-200", "delay-[260ms]", "delay-[320ms]"];
+                      const delays = ["delay-[220ms]", "delay-[320ms]", "delay-[420ms]"];
 
                       return (
                         <div
                           key={partIdx}
-                          className={`group/img relative h-32 sm:h-44 md:h-52 w-[28vw] sm:w-28 md:w-32 max-w-[130px] rounded-xl sm:rounded-2xl overflow-hidden shrink-0 shadow-md transition-all duration-500 ease-out hover:scale-[1.05] hover:shadow-xl cursor-pointer ${
-                            delays[partIdx]
-                          } ${
-                            isOpen
-                              ? "translate-y-0 opacity-100 scale-100"
-                              : "translate-y-3 opacity-0 scale-95"
+                          className={`group/img relative h-32 sm:h-44 md:h-52 w-[28vw] sm:w-28 md:w-32 max-w-[130px] rounded-xl sm:rounded-2xl overflow-hidden shrink-0 shadow-md transition-all duration-600 ease-out hover:scale-[1.05] hover:shadow-xl cursor-pointer ${
+                            isContentVisible
+                              ? `translate-y-0 scale-100 opacity-100 ${delays[partIdx]}`
+                              : "translate-y-4 scale-[0.96] opacity-0 duration-150 delay-0"
                           }`}
                         >
                           <div
-                            className="w-full h-full bg-no-repeat bg-cover enhanced-img transition-transform duration-700 group-hover/img:scale-105"
+                            className="w-full h-full bg-no-repeat bg-cover enhanced-img transition-transform duration-700 group-hover/img:scale-110"
                             style={{
                               backgroundImage: `url(${item.image})`,
                               backgroundSize: "300% 100%",
@@ -153,22 +220,32 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({ id, items })
                             }}
                           />
                           {/* Subtle elegant gradient overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
                         </div>
                       );
                     })}
                   </div>
 
+                  {/* Action link */}
                   {item.linkText && (
-                    <button
-                      type="button"
-                      onClick={() => scrollToTarget(item.linkHref || "#schedule")}
-                      className={`inline-block text-xs sm:text-sm font-bold text-neutral-800 underline hover:text-black hover:opacity-75 transition-all duration-400 pt-2 cursor-pointer ${
-                        isOpen ? "translate-y-0 opacity-100 delay-[350ms]" : "translate-y-2 opacity-0"
+                    <div
+                      className={`pt-2 transition-all duration-500 ease-out ${
+                        isContentVisible
+                          ? "translate-y-0 opacity-100 delay-[520ms]"
+                          : "-translate-y-2 opacity-0 duration-150 delay-0"
                       }`}
                     >
-                      {item.linkText}
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() => scrollToTarget(item.linkHref || "#schedule")}
+                        className="nav-link group/link inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-neutral-800 underline hover:text-black hover:opacity-85 transition-colors cursor-pointer"
+                      >
+                        <span>{item.linkText}</span>
+                        <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">
+                          →
+                        </span>
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
