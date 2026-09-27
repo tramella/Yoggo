@@ -39,19 +39,19 @@ export const Footer: React.FC = () => {
             <h4 className="font-extrabold text-base sm:text-lg text-black">Quick Link</h4>
             <button
               onClick={() => scrollToTarget("#classes")}
-              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+              className="nav-link text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
             >
               Classes
             </button>
             <button
               onClick={() => scrollToTarget("#instructors")}
-              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+              className="nav-link text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
             >
               Instructors
             </button>
             <button
               onClick={() => scrollToTarget("#schedule")}
-              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+              className="nav-link text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
             >
               Schedule
             </button>
@@ -62,19 +62,19 @@ export const Footer: React.FC = () => {
             <h4 className="font-extrabold text-base sm:text-lg text-black">Company</h4>
             <button
               onClick={() => scrollToTarget("#why-us")}
-              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+              className="nav-link text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
             >
               About Us
             </button>
             <button
               onClick={() => scrollToTarget("#styles")}
-              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+              className="nav-link text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
             >
               Yoga Styles
             </button>
             <button
               onClick={() => scrollToTarget("#book-trial")}
-              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+              className="nav-link text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
             >
               Contacts & Booking
             </button>
@@ -113,15 +113,15 @@ export const Footer: React.FC = () => {
       {/* Bottom Footer */}
       <div className="border-t border-neutral-400 py-6 flex flex-col md:flex-row items-center justify-between text-xs font-semibold text-neutral-700 space-y-4 md:space-y-0">
         <div className="flex space-x-6">
-          <a href="#" className="hover:text-black transition-colors">Instagram</a>
-          <a href="#" className="hover:text-black transition-colors">TikTok</a>
-          <a href="#" className="hover:text-black transition-colors">YouTube</a>
+          <a href="#" className="nav-link hover:text-black transition-colors">Instagram</a>
+          <a href="#" className="nav-link hover:text-black transition-colors">TikTok</a>
+          <a href="#" className="nav-link hover:text-black transition-colors">YouTube</a>
         </div>
         <div>Copyright &copy; {new Date().getFullYear()} YOGGO Studio. All rights reserved.</div>
         <div className="flex space-x-6">
-          <a href="#" className="hover:text-black transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-black transition-colors">Terms & Conditions</a>
-          <a href="#" className="hover:text-black transition-colors">Support</a>
+          <a href="#" className="nav-link hover:text-black transition-colors">Privacy Policy</a>
+          <a href="#" className="nav-link hover:text-black transition-colors">Terms & Conditions</a>
+          <a href="#" className="nav-link hover:text-black transition-colors">Support</a>
         </div>
       </div>
     </footer>

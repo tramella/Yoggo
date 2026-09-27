@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           {/* Tag: CLASSES with animated underline */}
           <button
             onClick={() => handleNavClick("#classes")}
-            className="relative text-sm lg:text-base font-semibold text-black py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300"
+            className="nav-link relative text-xs sm:text-sm lg:text-base font-semibold text-black py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300"
           >
             CLASSES
           </button>
@@ -60,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           {/* Tag: INSTRUCTORS with animated underline */}
           <button
             onClick={() => handleNavClick("#instructors")}
-            className="relative text-sm lg:text-base font-semibold text-black py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300"
+            className="nav-link relative text-xs sm:text-sm lg:text-base font-semibold text-black py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300"
           >
             INSTRUCTORS
           </button>
@@ -68,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           {/* Tag: SCHEDULE with animated underline */}
           <button
             onClick={() => handleNavClick("#schedule")}
-            className="relative text-sm lg:text-base font-semibold text-black py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300"
+            className="nav-link relative text-xs sm:text-sm lg:text-base font-semibold text-black py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300"
           >
             SCHEDULE
           </button>
