@@ -44,22 +44,23 @@ export const InstructorsSection: React.FC = () => {
       {/* Mosaic Grid Layout matching original design */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[280px_280px] gap-4">
         {/* Item 1 (Row 1, Col 1) */}
-        <div className="instructor-card relative rounded-3xl overflow-hidden min-h-[260px] lg:min-h-0 lg:col-start-1 lg:row-start-1">
+        <div className="instructor-card group relative rounded-3xl overflow-hidden min-h-[260px] lg:min-h-0 lg:col-start-1 lg:row-start-1 shadow-md hover:shadow-xl transition-shadow duration-300">
           <Image
             src="/images/pexels-polina-tankilevitch-6739057.webp"
             alt="Instructor"
             fill
-            className="object-cover rounded-3xl"
+            className="object-cover rounded-3xl enhanced-img group-hover:scale-105 transition-transform duration-700"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
         {/* Item 2: ImgIns1 (Row 1, Col 2-3, wide 2 cols) */}
-        <div className="instructor-card relative rounded-3xl overflow-hidden min-h-[260px] lg:min-h-0 lg:col-start-2 lg:col-span-2 lg:row-start-1 group">
+        <div className="instructor-card relative rounded-3xl overflow-hidden min-h-[260px] lg:min-h-0 lg:col-start-2 lg:col-span-2 lg:row-start-1 group shadow-md hover:shadow-xl transition-shadow duration-300">
           <Image
             src="/images/pexels-elly-fairytale-3822194.webp"
             alt="Agata Kowalsa"
             fill
-            className="object-cover rounded-3xl group-hover:scale-105 transition-transform duration-500"
+            className="object-cover rounded-3xl enhanced-img group-hover:scale-105 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-black/25 flex items-start">
             <div className="w-full bg-black text-white text-sm sm:text-base font-semibold py-3 px-5 rounded-t-3xl flex items-center justify-center space-x-2.5">
@@ -71,22 +72,23 @@ export const InstructorsSection: React.FC = () => {
         </div>
 
         {/* Item 3: ImgIns3 (Col 4, Row 1-2, tall spanning both rows) */}
-        <div className="instructor-card relative rounded-3xl overflow-hidden min-h-[300px] lg:min-h-0 lg:col-start-4 lg:row-start-1 lg:row-span-2">
+        <div className="instructor-card group relative rounded-3xl overflow-hidden min-h-[300px] lg:min-h-0 lg:col-start-4 lg:row-start-1 lg:row-span-2 shadow-md hover:shadow-xl transition-shadow duration-300">
           <Image
             src="/images/pexels-cottonbro-4323296.webp"
             alt="Instructor Portrait"
             fill
-            className="object-cover rounded-3xl"
+            className="object-cover rounded-3xl enhanced-img group-hover:scale-105 transition-transform duration-700"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
         {/* Item 4: ImgIns2 (Row 2, Col 1-2, wide 2 cols) */}
-        <div className="instructor-card relative rounded-3xl overflow-hidden min-h-[260px] lg:min-h-0 lg:col-start-1 lg:col-span-2 lg:row-start-2 group">
+        <div className="instructor-card relative rounded-3xl overflow-hidden min-h-[260px] lg:min-h-0 lg:col-start-1 lg:col-span-2 lg:row-start-2 group shadow-md hover:shadow-xl transition-shadow duration-300">
           <Image
             src="/images/pexels-cottonbro-4324059.webp"
             alt="Katarzyna Petrakova"
             fill
-            className="object-cover rounded-3xl group-hover:scale-105 transition-transform duration-500"
+            className="object-cover rounded-3xl enhanced-img group-hover:scale-105 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-black/25 flex items-start">
             <div className="w-full bg-black text-white text-sm sm:text-base font-semibold py-3 px-5 rounded-t-3xl flex items-center justify-center space-x-2.5">

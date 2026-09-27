@@ -2,7 +2,7 @@
 
 Welcome to **YOGGO** — a high-performance, modern, and interactive **Yoga Studio Landing Page**. Built with **Next.js 14+ (App Router)**, **TypeScript**, **Tailwind CSS**, and **GSAP Animations**, this landing page delivers an elegant, calming, and seamless user experience designed to convert visitors into students through trial class bookings, interactive schedules, and engaging visual showcases.
 
-🌐 **Live Preview:** [https://yoggo.onrender.com](https://yoggo.onrender.com)
+🌐 **Live Preview:** [https://yoggo-psi.vercel.app/](https://yoggo-psi.vercel.app/)
 
 ---
 
