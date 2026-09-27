@@ -1,10 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #f5f2ec;
   margin: 0;
-  font-family: "Montserrat";
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   position: relative;
+  overflow-x: hidden;
 }
 
 #preloader {
@@ -397,6 +402,16 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
 }
 
 .WhyUs .EachWhy .WhyUsContent .img-why .part,
+.WhyUs .EachWhy .WhyUsContent .img-why,
+.WhyUs .EachWhy .WhyUsContent1 .img-why {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 100%;
+  gap: 8px;
+}
+
+.WhyUs .EachWhy .WhyUsContent .img-why .part,
 .WhyUs .EachWhy .WhyUsContent .img-why .part-1,
 .WhyUs .EachWhy .WhyUsContent .img-why .part-2,
 .WhyUs .EachWhy .WhyUsContent .img-why .part-3,
@@ -404,12 +419,11 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-1,
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-2,
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-3 {
-  width: 120px;
-  height: 220px;
-  background-size: 360px 220px;
+  width: clamp(70px, 25vw, 120px);
+  height: clamp(140px, 45vw, 220px);
+  background-size: calc(clamp(70px, 25vw, 120px) * 3) clamp(140px, 45vw, 220px);
   background-repeat: no-repeat;
-  border-radius: 20px;
-  margin-right: 8px;
+  border-radius: 18px;
   margin-bottom: 1rem;
 }
 
@@ -432,7 +446,7 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-1.part2,
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-2.part2,
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-3.part2 {
-  background-position: -120px 0;
+  background-position: calc(-1 * clamp(70px, 25vw, 120px)) 0;
 }
 
 .WhyUs .EachWhy .WhyUsContent .img-why .part.part3,
@@ -443,7 +457,7 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-1.part3,
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-2.part3,
 .WhyUs .EachWhy .WhyUsContent1 .img-why .part-3.part3 {
-  background-position: -240px 0;
+  background-position: calc(-2 * clamp(70px, 25vw, 120px)) 0;
 }
 
 .WhyUs .EachWhy .WhyUsContent .link,
@@ -451,6 +465,9 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
   color: rgb(58, 58, 58);
   font-size: 16px;
   font-weight: 600;
+  text-decoration: underline;
+  display: inline-block;
+  margin-top: 6px;
 }
 
 .SectionBreak {
@@ -777,22 +794,24 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
 .ScheduleSection .Schedule {
   border: 1px solid #858585;
   border-radius: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: white;
 }
 
 .ScheduleSection .Schedule .HeaderSchedule {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, minmax(110px, 1fr));
   background-color: black;
   color: white;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  grid-auto-rows: 90px;
+  border-top-left-radius: 19px;
+  border-top-right-radius: 19px;
+  min-height: 80px;
 }
 
 .ScheduleSection .Schedule .BodySchedule {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: 12s0px;
+  grid-template-columns: repeat(6, minmax(110px, 1fr));
 }
 
 #schedule-body {
@@ -802,45 +821,120 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
 
 .day-header {
   text-align: center;
-  padding: 10px;
+  padding: 12px 6px;
   font-weight: bold;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-right: 1px solid #333;
+}
+
+.day-header:last-child {
+  border-right: none;
 }
 
 .day-header .dayOfWeek {
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+  text-transform: uppercase;
 }
 
 .day-header .noDate {
-  font-size: 28px;
-}
-
-.class-item {
-  padding: 10px;
-  border: 1px solid #858585;
-  margin: 5px;
-  background: #e0f7fa;
-  font-size: 14px;
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 2px;
 }
 
 .schedule-cell {
   width: 100%;
-  height: 120px;
-  border: 1px solid #858585;
+  min-height: 140px;
+  border: 1px solid #e2ded8;
   box-sizing: border-box;
-  padding: 8px;
+  padding: 12px 6px;
   text-align: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  transition: all 0.25s ease;
+  position: relative;
 }
 
-.schedule-cell:nth-child(19) {
-  border-bottom-left-radius: 20px;
+.schedule-cell.has-class {
+  background-color: #fdfcfa;
+  cursor: pointer;
+}
+
+.schedule-cell.has-class:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+  border-color: #2e2e2e;
+}
+
+.schedule-cell.empty-cell {
+  background-color: #f8f6f0;
+  opacity: 0.6;
+}
+
+.cell-time-hint {
+  font-size: 10px;
+  color: #999;
+  letter-spacing: 0.03em;
+}
+
+.schedule-cell .schedule-time {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.schedule-cell .schedule-subject {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0.25rem 0;
+  color: #111;
+  letter-spacing: 0.03em;
+}
+
+.schedule-cell .schedule-type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #444;
+  background: #eee8df;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.schedule-cell .btn-book {
+  width: 85%;
+  max-width: 110px;
+  border-radius: 40px;
+  height: 32px;
+  border: 1px solid #2e2e2e;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  color: #111;
+  transition: all 0.25s ease;
+}
+
+.schedule-cell .btn-book:hover {
+  background-color: black;
+  color: white;
+  border-color: black;
 }
 
 /* Tổng thể bộ lọc */
@@ -848,67 +942,116 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.Filter-Week,
-.EachSelect {
-  display: inline-block;
-  margin: 10px;
-  vertical-align: middle;
-  font-family: "Segoe UI", sans-serif;
+.Filter-Dropdowns {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.Filter-Week {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Bộ lọc tuần */
 .Filter-Week button {
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
-  padding: 8px 12px;
-  margin: 0 5px;
-  border-radius: 8px;
+  background-color: #eae5dc;
+  border: 1px solid #ccc;
+  font-size: 22px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  user-select: none;
 }
 
-.Filter-Week button:hover {
-  background-color: #dcdcdc;
+.Filter-Week button:hover:not(.disabled) {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.Filter-Week button.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 #week-range {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#week-range .week-tag {
+  background-color: black;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+#week-range .week-dates {
+  color: #333;
+  font-weight: 600;
 }
 
 /* EachSelect dropdown */
 .EachSelect {
   position: relative;
-  width: 180px;
+  width: 160px;
 }
 
 .selectedValueClass,
 .selectedValueStyle {
   display: block;
-  padding: 10px 14px;
+  padding: 10px 16px;
   background-color: #f5f2ec;
   border: 1px solid #ccc;
-  border-radius: 6px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 30px;
-  font-size: 18px;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.selectedValueClass:hover,
+.selectedValueStyle:hover {
+  border-color: #2e2e2e;
+  background-color: #eee9df;
 }
 
 .DropList {
   display: none;
   position: absolute;
-  top: 45px;
+  top: 48px;
   left: 0;
   right: 0;
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
   z-index: 100;
+  overflow: hidden;
 }
 
 .EachSelect:hover .DropList {
@@ -918,39 +1061,13 @@ header .header-menu .tag:hover::after, .side-menu .header-menu .tag:hover::after
 .DropList .option {
   padding: 10px 14px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
   transition: background-color 0.2s;
 }
 
 .DropList .option:hover {
-  background-color: #f0f0f0;
-}
-
-.schedule-cell:nth-child(24) {
-  border-bottom-right-radius: 20px;
-}
-
-.schedule-cell .schedule-time {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.schedule-cell .schedule-subject {
-  font-size: 24px;
-  font-weight: 600;
-  padding: 0.5rem 0;
-}
-
-.schedule-cell .btn-book {
-  width: 80%;
-  border-radius: 40px;
-  height: 40px;
-  border: 1px solid #858585;
-  font-size: 18px;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  background-color: #f2ede4;
 }
 
 .SectionBook {
@@ -1044,6 +1161,12 @@ footer .TopFooter .Link a {
   font-size: 16px;
   font-weight: 600;
   padding-top: 1.2rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+footer .TopFooter .Link a:hover {
+  opacity: 0.6;
 }
 
 footer .TopFooter .NewLetter .LinkContent {
@@ -1092,6 +1215,7 @@ footer .BottomFooter .LinkBottom a {
   font-size: 12px;
   font-weight: 600;
   margin-left: 1rem;
+  text-decoration: none;
 }
 
 footer .BottomFooter .LinkBottomR {
@@ -1105,6 +1229,7 @@ footer .BottomFooter .LinkBottomR a {
   font-size: 12px;
   font-weight: 600;
   margin-right: 1rem;
+  text-decoration: none;
 }
 
 footer .BottomFooter .copyright {
@@ -1122,11 +1247,12 @@ footer .BottomFooter .copyright {
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-  /* backdrop-filter: blur(1px); */
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .FromBookClass.openBook {
@@ -1134,164 +1260,151 @@ footer .BottomFooter .copyright {
 }
 
 .FromBookClass .Form {
-  width: 30%;
+  width: 90%;
+  max-width: 460px;
+  max-height: 90vh;
+  overflow-y: auto;
   display: flex;
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  height: 70%;
   border-radius: 20px;
   background-color: #f5f2ec;
-  padding: 3rem 2.5rem;
+  padding: 2.5rem 2rem;
   border: 1px solid #2e2e2e;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .FromBookClass .Form .TitleForm {
   position: relative;
   width: 95%;
   border-bottom: 1px solid #979797;
-  font-size: 40px;
-  font-weight: 200;
+  font-size: 32px;
+  font-weight: 300;
+  padding-bottom: 10px;
 }
 
 .FromBookClass .Form .TitleForm img {
-  width: 40px;
-  height: 40px;
-  right: 5px;
-  bottom: 5px;
+  width: 32px;
+  height: 32px;
+  right: 0;
+  bottom: 10px;
   position: absolute;
   object-fit: cover;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.FromBookClass .Form .TitleForm img:hover {
+  transform: scale(1.1);
 }
 
 .FromBookClass .Form .EachInput {
   position: relative;
+  width: 92%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  align-items: start;
+  border-radius: 30px;
+  height: 28px;
+  border: 1px solid #2e2e2e;
+  margin-top: 1.2rem;
 }
 
 .FromBookClass .Form .EachInput label {
   position: absolute;
-  top: -0.5rem;
+  top: -0.6rem;
   left: 1.5rem;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   background-color: #f5f1ea;
-  padding: 0 0.3rem;
-}
-
-.FromBookClass .Form .EachInput {
-  width: 90%;
-}
-
-.FromBookClass .Form .EachInput,
-.FromBookClass .Form .EachSelect {
-  display: flex;
-  /* grid-template-columns: 1fr;
-    */
-  flex-direction: column;
-  padding: 0.5rem;
-  align-items: start;
-  /*justify-content: space-around;
-   */
-  border-radius: 30px;
-  height: 25px;
-  border: 1px solid #2e2e2e;
-  margin-top: 1rem;
-  position: relative;
+  padding: 0 0.4rem;
+  color: #333;
 }
 
 .FromBookClass .Form .EachInput img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   object-fit: cover;
   position: absolute;
-  right: 20px;
+  right: 15px;
   top: 30%;
   display: none;
+  cursor: pointer;
 }
 
 .FromBookClass .Form .EachInput input {
   outline: none;
   border: none;
   background-color: transparent;
-  width: 100%;
+  width: 88%;
   padding: 0 0.5rem;
-  padding-left: 1rem;
+  padding-left: 0.8rem;
+  font-size: 14px;
 }
 
 .FromBookClass .Form .EachInput input::placeholder {
   color: gray;
   font-style: italic;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   font-family: "Montserrat";
 }
 
 .FromBookClass .Form .EachInput input:focus {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   font-family: "Montserrat";
 }
 
 .FromBookClass .Form .EachSelect {
-  font-size: 16px;
-  font-weight: 700;
-  width: 85%;
-  padding-left: 1.5rem;
+  font-size: 15px;
+  font-weight: 600;
+  width: 92%;
+  padding: 0.6rem 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 30px;
+  border: 1px solid #2e2e2e;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  position: relative;
 }
 
 .FromBookClass .Form .EachSelect img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   object-fit: cover;
-  position: absolute;
-  right: 20px;
-  top: 30%;
 }
 
 .FromBookClass .Form .EachSelect .DropList,
 .FromBookClass .Form .EachSelect .DropList1 {
   position: absolute;
-  top: 100%;
+  top: 105%;
   left: 0;
   width: 100%;
   height: auto;
   background-color: #f5f2ec;
   border: 1px solid #808080;
   z-index: 10;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* .FromBookClass .Form .EachSelect .DropList div {
-   display: flex;
-   flex-direction: column;
-   align-items: start;
-   justify-content: center;
- } */
 .FromBookClass .Form .EachSelect .DropList .option,
 .FromBookClass .Form .EachSelect .DropList1 .option {
-  padding: 0.2rem;
-  margin-top: 0.3rem;
-  padding-left: 1rem;
-  font-size: 14px;
+  padding: 0.5rem 1rem;
+  font-size: 13px;
   font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .FromBookClass .Form .EachSelect .DropList .option:hover,
 .FromBookClass .Form .EachSelect .DropList1 .option:hover {
-  background-color: #e6e6e1;
-  border-radius: 5px;
-}
-
-.FromBookClass .Form .BtnBook {
-  text-align: center;
-  border: 1px solid #2e2e2e;
-  font-size: 16px;
-  font-weight: 700;
-  width: 90%;
-  height: 25px;
-  border-radius: 30px;
+  background-color: #e6e0d5;
 }
 
 .FromBookClass .Form .accept {
@@ -1299,28 +1412,41 @@ footer .BottomFooter .copyright {
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  width: 90%;
+  width: 92%;
   border-top: 1px solid #979797;
-  margin-top: 10px;
+  margin-top: 1.2rem;
+  padding-top: 0.5rem;
 }
 
 .FromBookClass .Form .accept .allow {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
 .FromBookClass .Form .accept .BtnSubmit {
   width: 100%;
-  height: 40px;
+  height: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #2e2e2e;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
+  letter-spacing: 0.05em;
   border-radius: 30px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+.FromBookClass .Form .accept .BtnSubmit:hover {
+  background-color: black;
+  color: white;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1480px) {
@@ -1601,16 +1727,6 @@ footer .BottomFooter .copyright {
   footer .BottomFooter .copyright {
     grid-row: 3;
     padding: 1rem 0;
-  }
-
-  #schedule-body {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .HeaderSchedule {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr;
   }
 }
 
