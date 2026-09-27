@@ -115,7 +115,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col justify-between">
+    <main className="min-h-screen flex flex-col justify-between overflow-x-hidden max-w-full">
       {/* Navbar */}
       <Navbar onOpenBooking={() => handleOpenBooking("Online Consultation", "09:00 AM - 10:00 AM")} />
 

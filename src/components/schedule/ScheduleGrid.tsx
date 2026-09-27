@@ -18,7 +18,7 @@ export const ScheduleGrid: React.FC<ScheduleGridProps> = ({
   onBookClass,
 }) => {
   return (
-    <div className="w-full border border-neutral-400 rounded-3xl overflow-x-auto bg-white shadow-sm">
+    <div className="w-full border border-neutral-400 rounded-3xl overflow-x-auto no-scrollbar bg-white shadow-sm">
       {/* Table Header with Days */}
       <div className="grid grid-cols-6 min-w-[660px] bg-black text-white rounded-t-3xl border-b border-neutral-700">
         {days.map((day, idx) => (

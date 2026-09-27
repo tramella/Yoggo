@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="w-[88%] max-w-7xl mx-auto mt-20 pt-10">
       {/* Top Footer Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-12">
         {/* Logo */}
         <div className="flex flex-col justify-start">
           <Image
@@ -32,50 +32,53 @@ export const Footer: React.FC = () => {
           />
         </div>
 
-        {/* Quick Links */}
-        <div className="flex flex-col space-y-3">
-          <h4 className="font-extrabold text-lg text-black">Quick Link</h4>
-          <button
-            onClick={() => scrollToTarget("#classes")}
-            className="text-left text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
-          >
-            Classes
-          </button>
-          <button
-            onClick={() => scrollToTarget("#instructors")}
-            className="text-left text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
-          >
-            Instructors
-          </button>
-          <button
-            onClick={() => scrollToTarget("#schedule")}
-            className="text-left text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
-          >
-            Schedule
-          </button>
-        </div>
+        {/* Links Wrapper: Same row with space-between on small screens, separate columns on desktop */}
+        <div className="col-span-1 md:col-span-1 lg:col-span-2 grid grid-cols-2 gap-6 sm:gap-10 justify-between">
+          {/* Quick Links */}
+          <div className="flex flex-col space-y-3">
+            <h4 className="font-extrabold text-base sm:text-lg text-black">Quick Link</h4>
+            <button
+              onClick={() => scrollToTarget("#classes")}
+              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+            >
+              Classes
+            </button>
+            <button
+              onClick={() => scrollToTarget("#instructors")}
+              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+            >
+              Instructors
+            </button>
+            <button
+              onClick={() => scrollToTarget("#schedule")}
+              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+            >
+              Schedule
+            </button>
+          </div>
 
-        {/* Company Links */}
-        <div className="flex flex-col space-y-3">
-          <h4 className="font-extrabold text-lg text-black">Company</h4>
-          <button
-            onClick={() => scrollToTarget("#why-us")}
-            className="text-left text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
-          >
-            About Us
-          </button>
-          <button
-            onClick={() => scrollToTarget("#styles")}
-            className="text-left text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
-          >
-            Yoga Styles
-          </button>
-          <button
-            onClick={() => scrollToTarget("#book-trial")}
-            className="text-left text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
-          >
-            Contacts & Booking
-          </button>
+          {/* Company Links */}
+          <div className="flex flex-col space-y-3">
+            <h4 className="font-extrabold text-base sm:text-lg text-black">Company</h4>
+            <button
+              onClick={() => scrollToTarget("#why-us")}
+              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+            >
+              About Us
+            </button>
+            <button
+              onClick={() => scrollToTarget("#styles")}
+              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+            >
+              Yoga Styles
+            </button>
+            <button
+              onClick={() => scrollToTarget("#book-trial")}
+              className="text-left text-xs sm:text-sm font-semibold text-neutral-700 hover:text-black transition-colors"
+            >
+              Contacts & Booking
+            </button>
+          </div>
         </div>
 
         {/* Newsletter */}

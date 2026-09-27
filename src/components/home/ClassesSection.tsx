@@ -50,23 +50,24 @@ export const ClassesSection: React.FC = () => {
         </div>
 
         {/* Card 2: ImgClass1 (Row 1, Col 2-3, wide 2 cols) */}
-        <div className="class-card relative rounded-3xl overflow-hidden min-h-[240px] lg:min-h-0 lg:col-start-2 lg:col-span-2 lg:row-start-1">
+        <div className="class-card group relative rounded-3xl overflow-hidden min-h-[240px] lg:min-h-0 lg:col-start-2 lg:col-span-2 lg:row-start-1 shadow-md hover:shadow-xl transition-shadow duration-300">
           <Image
             src="/images/5729bf05948c04e15a5811679fd90a80.jpg"
             alt="Yoga Practice"
             fill
-            className="object-cover rounded-3xl"
+            className="object-cover rounded-3xl enhanced-img group-hover:scale-105 transition-transform duration-700"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
         {/* Card 3: Online (Row 1, Col 4) */}
-        <div className="class-card bg-black text-white rounded-3xl p-6 flex flex-col items-center justify-center min-h-[240px] lg:min-h-0 lg:col-start-4 lg:row-start-1">
+        <div className="class-card bg-black text-white rounded-3xl p-6 flex flex-col items-center justify-center min-h-[240px] lg:min-h-0 lg:col-start-4 lg:row-start-1 shadow-md">
           <h3 className="text-xl md:text-2xl font-bold tracking-wider">ONLINE</h3>
           <p className="text-xs md:text-sm text-neutral-300 mt-2 font-medium">from $19 / month</p>
         </div>
 
         {/* Card 4: Info Box with stars (Row 2, Col 1) */}
-        <div className="class-card border border-black rounded-3xl p-6 flex flex-col items-center justify-center text-center space-y-2.5 min-h-[240px] lg:min-h-0 lg:col-start-1 lg:row-start-2">
+        <div className="class-card border border-black rounded-3xl p-6 flex flex-col items-center justify-center text-center space-y-2.5 min-h-[240px] lg:min-h-0 lg:col-start-1 lg:row-start-2 shadow-sm">
           <p className="text-xs sm:text-sm font-semibold text-neutral-800">
             Carefully selected classes for groups and individuals.
           </p>
@@ -81,19 +82,20 @@ export const ClassesSection: React.FC = () => {
         </div>
 
         {/* Card 5: Group (Row 2, Col 2) */}
-        <div className="class-card bg-black text-white rounded-3xl p-6 flex flex-col items-center justify-center min-h-[240px] lg:min-h-0 lg:col-start-2 lg:row-start-2">
+        <div className="class-card bg-black text-white rounded-3xl p-6 flex flex-col items-center justify-center min-h-[240px] lg:min-h-0 lg:col-start-2 lg:row-start-2 shadow-md">
           <h3 className="text-xl md:text-2xl font-bold tracking-wider">GROUP</h3>
           <p className="text-xs md:text-sm text-neutral-300 mt-2 font-medium">from $49 / month</p>
         </div>
 
         {/* Card 6: ImgClass2 (Row 2, Col 3-4, wide 2 cols) */}
-        <div className="class-card relative rounded-3xl overflow-hidden min-h-[240px] lg:min-h-0 lg:col-start-3 lg:col-span-2 lg:row-start-2">
+        <div className="class-card group relative rounded-3xl overflow-hidden min-h-[240px] lg:min-h-0 lg:col-start-3 lg:col-span-2 lg:row-start-2 shadow-md hover:shadow-xl transition-shadow duration-300">
           <Image
             src="/images/pexels-john-tekeridis-21837-14843543.jpg"
             alt="Group yoga"
             fill
-            className="object-cover rounded-3xl"
+            className="object-cover rounded-3xl enhanced-img group-hover:scale-105 transition-transform duration-700"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
       </div>
     </section>

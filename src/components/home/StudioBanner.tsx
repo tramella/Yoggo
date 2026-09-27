@@ -44,16 +44,16 @@ export const StudioBanner: React.FC<StudioBannerProps> = ({
 
   return (
     <section ref={bannerRef} className="w-[88%] max-w-7xl mx-auto my-16">
-      <div className="banner-content relative w-full h-[450px] sm:h-[500px] md:h-[580px] rounded-3xl overflow-hidden flex items-center justify-center text-center p-6 sm:p-12 shadow-xl">
+      <div className="banner-content relative w-full h-[450px] sm:h-[500px] md:h-[580px] rounded-3xl overflow-hidden flex items-center justify-center text-center p-6 sm:p-12 shadow-xl group">
         {/* Background Image */}
         <Image
           src={image}
           alt="Studio Banner"
           fill
-          className="object-cover transition-transform duration-700 hover:scale-105"
+          className="object-cover enhanced-img transition-transform duration-700 group-hover:scale-105"
         />
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/55 rounded-3xl" />
+        <div className="absolute inset-0 bg-black/50 rounded-3xl group-hover:bg-black/45 transition-colors duration-500" />
 
         {/* Content */}
         <div className="relative z-10 max-w-3xl space-y-4 text-white">

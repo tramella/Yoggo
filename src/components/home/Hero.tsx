@@ -90,36 +90,36 @@ export const Hero: React.FC = () => {
             alt={SLIDES[currentSlide].title}
             fill
             priority
-            className="object-cover rounded-3xl"
+            className="object-cover rounded-3xl enhanced-img"
           />
-          {/* Subtle bottom gradient overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 rounded-3xl" />
+          {/* Subtle bottom gradient overlay for readability and depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/10 rounded-3xl" />
         </div>
 
-        {/* Slide Caption Overlay */}
-        <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10 text-white max-w-lg space-y-2">
-          <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase opacity-90">
+        {/* Slide Caption Overlay (Responsive Positioning) */}
+        <div className="absolute bottom-16 left-5 right-5 sm:bottom-10 sm:left-10 sm:right-auto z-10 text-white max-w-lg space-y-1.5 sm:space-y-2 pointer-events-none">
+          <p className="text-[11px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase opacity-90 drop-shadow-md">
             {SLIDES[currentSlide].subtitle}
           </p>
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-normal leading-tight">
+          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-tight drop-shadow-md max-w-[85%] sm:max-w-none">
             {SLIDES[currentSlide].title}
           </h1>
         </div>
 
-        {/* Active Number Indicator & Navigation Controls (Bottom Right) */}
-        <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 z-20 flex items-center space-x-3 bg-black/60 backdrop-blur-md px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-white border border-white/20 shadow-lg">
+        {/* Active Number Indicator & Navigation Controls (Top-right on small screens, bottom-right on desktop) */}
+        <div className="absolute top-4 right-4 sm:top-auto sm:bottom-10 sm:right-10 z-20 flex items-center space-x-2 sm:space-x-3 bg-black/65 backdrop-blur-md px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full text-white border border-white/20 shadow-lg scale-90 sm:scale-100 origin-top-right sm:origin-bottom-right">
           {/* Prev button */}
           <button
             type="button"
             onClick={prevSlide}
-            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95"
+            className="w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95"
             aria-label="Previous slide"
           >
             ‹
           </button>
 
           {/* Active Number Numbers Display */}
-          <div className="flex items-center space-x-1 font-mono text-xs sm:text-sm font-semibold tracking-wider">
+          <div className="flex items-center space-x-1 font-mono text-[11px] sm:text-sm font-semibold tracking-wider">
             <span className="text-white font-bold">{activeNumStr}</span>
             <span className="text-white/40">/</span>
             <span className="text-white/60">{totalNumStr}</span>
@@ -132,10 +132,10 @@ export const Hero: React.FC = () => {
                 key={slide.id}
                 type="button"
                 onClick={() => goToSlide(idx)}
-                className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${
+                className={`h-2 rounded-full transition-all duration-300 ${
                   currentSlide === idx
-                    ? "bg-white w-5 sm:w-6"
-                    : "bg-white/40 hover:bg-white/70"
+                    ? "bg-white w-4 sm:w-6"
+                    : "bg-white/40 hover:bg-white/70 w-2"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -146,7 +146,7 @@ export const Hero: React.FC = () => {
           <button
             type="button"
             onClick={nextSlide}
-            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95"
+            className="w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95"
             aria-label="Next slide"
           >
             ›
